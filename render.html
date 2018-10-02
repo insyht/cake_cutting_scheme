@@ -1,0 +1,33 @@
+<body onload="render();"></body>
+<label for="pieces">Pieces:</label>
+<input id="pieces" type="number" min="1" max="100" value="4"><button onclick="render()">Draw</button><br><br>
+<canvas id="cake" width=500" height="500"></canvas>
+
+<script>
+    function render() {
+        var pieces = document.getElementById('pieces').value;
+        var cake = document.getElementById('cake');
+        var ctx = cake.getContext('2d');
+        var centerX = cake.width / 2;
+        var centerY = cake.height / 2;
+        var radius = 250;
+        var angleLength = (360 / pieces) * (Math.PI / 180);
+        var startAngle = 0;
+        var endAngle = startAngle + angleLength;
+
+        ctx.clearRect(0,0, cake.width, cake.height);
+
+        // Render pieces
+        for (var i = 0; i < pieces; i++) {
+            startAngle = i * angleLength;
+            endAngle = startAngle + angleLength;
+            ctx.strokeStyle = 'black';
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, startAngle, endAngle, false);
+            ctx.lineTo(centerX, centerY);
+
+            ctx.stroke();
+        }
+    }
+</script>
